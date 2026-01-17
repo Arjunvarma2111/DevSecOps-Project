@@ -41,7 +41,8 @@ Security is embedded at every stage of the pipeline through static code analysis
 1. Developer pushes code to GitHub  
 2. Jenkins pipeline (running on AWS EC2) is triggered  
 3. Jenkins performs:
-   - SonarQube code quality analysis  
+   - SonarQube code quality analysis
+   - Owasp-dependency check
    - Trivy vulnerability scanning  
    - Docker image build and push  
    - Kubernetes manifest updates (Stable & Canary)  
@@ -81,7 +82,8 @@ Security is embedded at every stage of the pipeline through static code analysis
 The pipeline integrates security and automation tools to achieve DevSecOps workflows:
 
 - **Jenkins** manages CI/CD automation  
-- **SonarQube** ensures code quality and maintainability  
+- **SonarQube** ensures code quality and maintainability
+- **Owasp-dependency** checks CVE's in dependencies used
 - **Trivy** scans Docker images for vulnerabilities  
 - **Docker** packages the application  
 - **ArgoCD** handles GitOps-based deployments to AWS EKS  
@@ -93,14 +95,15 @@ The pipeline integrates security and automation tools to achieve DevSecOps workf
 
 1. Start Jenkins pipeline  
 2. Clone code from GitHub  
-3. Analyze code using SonarQube  
-4. Scan Docker image vulnerabilities using Trivy  
-5. Build and push Docker image  
-6. Update stable and canary Kubernetes YAML files  
-7. Push updated manifests to GitHub  
-8. ArgoCD syncs the EKS cluster  
-9. Deploy updated application versions  
-10. Monitor application using Prometheus and Grafana 
+3. Analyze code using SonarQube
+4. Owasp-dependency check
+5. Scan Docker image vulnerabilities using Trivy  
+6. Build and push Docker image  
+7. Update stable and canary Kubernetes YAML files  
+8. Push updated manifests to GitHub  
+9. ArgoCD syncs the EKS cluster  
+10. Deploy updated application versions  
+11. Monitor application using Prometheus and Grafana 
 
 ---
 
@@ -110,7 +113,7 @@ The pipeline integrates security and automation tools to achieve DevSecOps workf
 |--------|------|
 | Cloud | AWS EC2, AWS EKS |
 | CI/CD | Jenkins |
-| Security | SonarQube, Trivy |
+| Security | SonarQube, Trivy, Owasp-dependency check |
 | Containers | Docker |
 | GitOps | ArgoCD |
 | SCM | GitHub |
