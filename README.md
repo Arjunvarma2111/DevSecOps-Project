@@ -13,6 +13,7 @@ Click the thumbnail below to watch the complete end-to-end demonstration of the 
 This demo covers:
 - Jenkins CI/CD pipeline execution
 - SonarQube static code analysis
+- Owasp-dependency check 
 - Trivy container vulnerability scanning
 - Docker image build and push
 - GitOps-based deployment using ArgoCD
@@ -57,7 +58,8 @@ Security is embedded at every stage of the pipeline through static code analysis
 - Code commits trigger Jenkins via GitHub webhook  
 - Jenkins executes the following stages:
   - Repository cloning  
-  - SonarQube static code analysis  
+  - SonarQube static code analysis
+  - Owasp-dependency check
   - Trivy container vulnerability scanning  
   - Docker image build and push to registry  
   - Update Kubernetes deployment manifests with new image tags  
@@ -83,7 +85,7 @@ The pipeline integrates security and automation tools to achieve DevSecOps workf
 - **Trivy** scans Docker images for vulnerabilities  
 - **Docker** packages the application  
 - **ArgoCD** handles GitOps-based deployments to AWS EKS  
-- **CloudWatch** enables monitoring and observability  
+- **Prometheus and grafana** enables monitoring and observability  
 
 ---
 
@@ -98,7 +100,7 @@ The pipeline integrates security and automation tools to achieve DevSecOps workf
 7. Push updated manifests to GitHub  
 8. ArgoCD syncs the EKS cluster  
 9. Deploy updated application versions  
-10. Monitor application using CloudWatch  
+10. Monitor application using Prometheus and Grafana 
 
 ---
 
@@ -112,7 +114,6 @@ The pipeline integrates security and automation tools to achieve DevSecOps workf
 | Containers | Docker |
 | GitOps | ArgoCD |
 | SCM | GitHub |
-| Monitoring | AWS CloudWatch |
 | Application | MERN Stack (Socio-Echo) |
 | Grafana | Prometheus|
 
@@ -127,7 +128,7 @@ The following validations were performed:
 - Vulnerability detection using Trivy  
 - Automated GitOps deployments using ArgoCD  
 - Application availability on AWS EKS  
-- Monitoring logs and metrics via CloudWatch  
+- Monitoring logs and metrics via Prometheus and Grafana
 
 ---
 
@@ -153,15 +154,6 @@ The application was containerized and deployed using Kubernetes on AWS EKS.
 
 ---
 
-## 🚀 Future Enhancements
-
-- Add Prometheus & Grafana for advanced monitoring  
-- Implement Blue-Green deployment strategy  
-- Add OWASP Dependency-Check  
-- Enable automated rollback using ArgoCD  
-- Integrate Slack/Email notifications  
-
----
 
 ## 📄 License
 
