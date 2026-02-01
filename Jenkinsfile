@@ -12,7 +12,7 @@ pipeline {
         
         stage('Clone code from GitHub') {
             steps {
-                git url: "https://github.com/MukheshDN4352/SocialEcho-1.git", branch: "master"
+                git url: "https://github.com/Arjunvarma2111/SocialEcho-1.git", branch: "master"
             }
         }
 
@@ -40,7 +40,7 @@ pipeline {
                             git add frontend-server.yaml node-server.yaml
                             git commit -m "Promote Canary to Stable - Build #${BUILD_NUMBER}" || echo "No stable changes to commit"
 
-                            git push https://$GIT_USER:$GIT_PASS@github.com/MukheshDN4352/Kubernetes.git main
+                            git push https://$GIT_USER:$GIT_PASS@github.com/arjunvarma2111/Kubernetes.git main
 
                             cd ../..
                         '''
@@ -100,14 +100,14 @@ pipeline {
 
                             echo "Building and pushing frontend..."
                             cd client
-                            docker build -t mukheshdn/frontend:${BUILD_NUMBER} .
-                            docker push mukheshdn/frontend:${BUILD_NUMBER}
+                            docker build -t arjunvarma2111/frontend:${BUILD_NUMBER} .
+                            docker push arjunvarma2111/frontend:${BUILD_NUMBER}
                             cd ..
 
                             echo "Building and pushing backend..."
                             cd server
-                            docker build -t mukheshdn/backend:${BUILD_NUMBER} .
-                            docker push mukheshdn/backend:${BUILD_NUMBER}
+                            docker build -t arjunvarma2111/backend:${BUILD_NUMBER} .
+                            docker push arjunvarma2111/backend:${BUILD_NUMBER}
                             cd ..
 
                             docker logout
@@ -123,12 +123,12 @@ pipeline {
                     sh '''
                         echo "Cloning Kubernetes repo for canary update..."
                         rm -rf Kubernetes
-                        git clone https://github.com/MukheshDN4352/Kubernetes.git
+                        git clone https://github.com/arjunvarma2111/Kubernetes.git
                         cd Kubernetes/kubernetes
 
                         echo "Updating canary YAML files with new images..."
-                        sed -i "s|image: mukheshdn/frontend:.*|image: mukheshdn/frontend:${BUILD_NUMBER}|" frontend-canary.yaml
-                        sed -i "s|image: mukheshdn/backend:.*|image: mukheshdn/backend:${BUILD_NUMBER}|" node-canary.yaml
+                        sed -i "s|image: arjunvarma2111/frontend:.*|image: arjunvarma2111/frontend:${BUILD_NUMBER}|" frontend-canary.yaml
+                        sed -i "s|image: arjunvarma2111/backend:.*|image: arjunvarma2111/backend:${BUILD_NUMBER}|" node-canary.yaml
 
                         cd ../..
                     '''
@@ -207,3 +207,4 @@ Jenkins CI/CD
     }
 
 }
+
