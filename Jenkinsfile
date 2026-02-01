@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         SONAR_HOME = tool name: 'Sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-        DOCKERHUB_USER = 'mukheshdn'
-        DOCKER_CREDENTIALS_ID = 'dockerhub-creds'
-        GITHUB_CREDENTIALS_ID = 'github-token'
+        DOCKERHUB_USER = 'arjunavrma2111'
+        DOCKER_CREDENTIALS_ID = 'dockerhub'
+        GITHUB_CREDENTIALS_ID = 'github'
     }
 
     stages {
@@ -183,7 +183,7 @@ Jenkins CI/CD
 
         failure {
             echo "❌ Pipeline failed."
-            mail to: 'mukheshdn.cs23@bmsce.ac.in',
+            mail to: 'arjunvarma2111@gmail.com',
                  subject: "Jenkins Build FAILED: ${env.JOB_NAME} [#${env.BUILD_NUMBER}]",
                  body: """
 Hello,
@@ -205,4 +205,5 @@ Jenkins CI/CD
             cleanWs()
         }
     }
+
 }
