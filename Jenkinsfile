@@ -22,9 +22,9 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: env.GITHUB_CREDENTIALS_ID, usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                         sh '''
                             echo "Cloning Kubernetes repo for promotion..."
-                            rm -rf Kubernetes
-                            git clone https://$GIT_USER:$GIT_PASS@github.com/MukheshDN4352/Kubernetes.git
-                            cd Kubernetes/kubernetes
+                            rm -rf eks-gitops-k8s-manifests
+                            git clone https://$GIT_USER:$GIT_PASS@github.com/Arjunvarma2111/eks-gitops-k8s-manifests.git
+                            cd eks-gitops-k8s-manifests/kubernetes
 
                             echo "Promoting existing canary image to stable..."
                             FRONT_IMG=$(grep "image:" frontend-canary.yaml | awk '{print $2}')
@@ -40,7 +40,7 @@ pipeline {
                             git add frontend-server.yaml node-server.yaml
                             git commit -m "Promote Canary to Stable - Build #${BUILD_NUMBER}" || echo "No stable changes to commit"
 
-                            git push https://$GIT_USER:$GIT_PASS@github.com/arjunvarma2111/Kubernetes.git main
+                            git push https://$GIT_USER:$GIT_PASS@github.com/Arjunvarma2111/eks-gitops-k8s-manifests.git main
 
                             cd ../..
                         '''
@@ -207,4 +207,5 @@ Jenkins CI/CD
     }
 
 }
+
 
