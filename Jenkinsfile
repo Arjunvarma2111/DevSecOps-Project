@@ -123,7 +123,7 @@ pipeline {
                     sh '''
                         echo "Cloning Kubernetes repo for canary update..."
                         rm -rf Kubernetes
-                        git clone https://github.com/arjunvarma2111/Kubernetes.git
+                        git clone https://github.com/Arjunvarma2111/eks-gitops-k8s-manifests.git
                         cd Kubernetes/kubernetes
 
                         echo "Updating canary YAML files with new images..."
@@ -142,14 +142,14 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: env.GITHUB_CREDENTIALS_ID, usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                         sh '''
                             echo "Committing and pushing updated YAMLs to Kubernetes repo..."
-                            cd Kubernetes
+                            cd eks-gitops-k8s-manifests
                             git config --global user.email "jenkins@ci.com"
                             git config --global user.name "Jenkins CI"
 
                             git add kubernetes/frontend-canary.yaml kubernetes/node-canary.yaml kubernetes/frontend-server.yaml kubernetes/node-server.yaml
                             git commit -m "Update Canary & Promote Stable - Build #${BUILD_NUMBER}" || echo "No new canary changes to commit"
 
-                            git push https://$GIT_USER:$GIT_PASS@github.com/MukheshDN4352/Kubernetes.git main
+                            git push https://$GIT_USER:$GIT_PASS@github.com/Arjunvarma2111/eks-gitops-k8s-manifests.git main
 
                             cd ..
                         '''
@@ -207,5 +207,6 @@ Jenkins CI/CD
     }
 
 }
+
 
 
